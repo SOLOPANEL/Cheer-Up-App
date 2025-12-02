@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Link to the custom styles -->
+    <link rel="stylesheet" href="./style.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The World</title>
+    <!-- We will use Inter font for a modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<!-- Added onclick to the body for the dynamic background splash effect -->
+<body onclick="createSplash(event)"> 
+    <div id="app-container">
+        <header>
+            <h1 id="main-header">The World: Recharge yourself and let your stresses drift away.</h1>
+        </header>
+        
+        <main>
+            <!-- Motivational Section -->
+            <section class="action-section">
+                <h2>Need Motivation?</h2>
+                <h3 class="subtitle">Fill Up Your Tank Again! ⛽</h3>
+                <button id="btn1" onclick="changeButton(this, motivationalMsg)">Find Power</button>
+            </section>
+            
+            <!-- Caring Section -->
+            <section class="action-section">
+                <h2>Feeling Bored?</h2>
+                <h3 class="subtitle">Have Some Surprises! 🎁</h3>
+                <button id="btn2" onclick="changeButton(this, lovCareMsg)">Find Joy</button>
+            </section>
+        </main>
+
+        <footer>
+            Designed for Joy
+            <p>by</p>
+            Mohit
+        </footer>
+    </div>
+
+    <!-- The message box will pop up here instead of using alert() -->
+    <div id="message-display"></div>
+    
+    <!-- Link to the dynamic JavaScript -->
+    <script src="./main.js"></script>
+</body>
+</html>

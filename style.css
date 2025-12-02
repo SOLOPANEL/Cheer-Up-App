@@ -1,0 +1,160 @@
+/* --- Joyful Color Palette --- */
+:root {
+    --color-bg-light: #071324; /* Off-White/Light Gray */
+    --color-pink: #f7d0d7;     /* Soft Pink */
+    --color-blue: #afcae7;     /* Sky Blue */
+    --color-green: #b5e4d4;    /* Mint Green */
+    --color-dark-text: #ffffff;/* Dark Gray Text */
+    --color-button-default: var(--color-blue);
+    --color-button-active: var(--color-pink);
+    --font-primary: 'Inter', sans-serif;
+}
+
+/* --- Global & Layout (Making it "Bigger" and Centered) --- */
+body {
+    background-color: var(--color-bg-light);
+    color: var(--color-dark-text);
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    /* Forces the body to cover the full viewport, making it feel "bigger" */
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-x: hidden; /* Prevent horizontal scroll from dynamic elements */
+    position: relative;
+}
+
+/* #app-container {
+    width: 90%;
+    max-width: 800px;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease-in-out;
+} */
+
+/* --- Header Styling (Cool Transition) --- */
+header {
+    margin-bottom: 2rem;
+}
+
+#main-header {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--color-dark-text);
+    line-height: 1.3;
+    /* Simple but cool transition effect on hover/focus */
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; 
+}
+
+#main-header:hover {
+    color: var(--color-pink);
+    transform: scale(1.02);
+}
+
+/* --- Main Content & Sections --- */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.action-section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-dark-text);
+    margin-bottom: 0.5rem;
+}
+
+.action-section .subtitle {
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-dark-text);
+    opacity: 0.7;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Button Styling --- */
+button {
+    background-color: var(--color-button-default);
+    color: rgb(255, 255, 255); /* Darker text for contrast */
+    padding: 15px 30px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-radius: 50px; /* Pill shape for playful look */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, transform 0.1s ease-out, box-shadow 0.3s ease-in-out;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Footer Styling --- */
+footer {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: var(--color-dark-text);
+    opacity: 0.5;
+}
+
+/* --- Interactive Splash Effect Element --- */
+.splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 1;
+    z-index: -1; /* Place behind the content */
+    pointer-events: none;
+    transition: transform 1.5s ease-out, opacity 1s ease-out;
+}
+
+/* Animation for the splash */
+.splash.active {
+    transform: scale(75); /* Scale up to cover the screen */
+    opacity: 0;
+}
+
+/* --- Message Display Modal (Replaces Alert) --- */
+#message-display {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px); /* Off-screen initially */
+    background-color: var(--color-green);
+    color: #3e5d87;
+    padding: 15px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    font-weight: 700;
+    z-index: 1000;
+    max-width: 90vw;
+    text-align: center;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease-out;
+}
+
+#message-display.show {
+    transform: translateX(-50%) translateY(0); /* Slide up into view */
+    opacity: 1;
+}
