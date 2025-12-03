@@ -101,7 +101,7 @@ function showMessage(message) {
     // Hide the message after 4 seconds
     display.timeoutId = setTimeout(() => {
         display.classList.remove('show');
-    }, 4000);
+    }, 3000);
 }
 
 
@@ -169,4 +169,5 @@ function createSplash(event) {
     setTimeout(() => {
         splash.remove();
     }, 1500); 
+
 }
