@@ -1,7 +1,7 @@
-const originalText = "Find Power/Find Joy"; // Changed to be more generic for both buttons
+// const originalText = "Find Power/Find Joy"; // Changed to be more generic for both buttons
 const originalColor = "var(--color-blue)"; 
 
-const newText = "Reset";
+const newText = "Next Thought";
 const newColor = "var(--color-pink)"; // Defined in CSS vars for consistency
 
 // Dynamic splash colors (joyful palette)
@@ -9,8 +9,11 @@ const splashColors = [
     'var(--color-pink)', 
     'var(--color-blue)', 
     'var(--color-green)',
+    'var(--color-red)',
     '#FFE0B2', // Soft Orange
-    '#E1BEE7'  // Lavender
+    '#E1BEE7',  // Lavender
+    '#892d44ff', // Soft Burgundy
+    '#899fdbff',  // Lavender
 ];
 
 const motivationalMsg = [
@@ -112,29 +115,38 @@ function showMessage(message) {
  */
 function changeButton(buttonElement, messageArray) {
     let message = "";
+
+    const newColorValue = getComputedStyle(document.documentElement).getPropertyValue('--color-pink').trim();
+    const originalColorValue = getComputedStyle(document.documentElement).getPropertyValue('--color-blue').trim();
+    
+    const isButtonActive = buttonElement.style.backgroundColor === newColorValue || buttonElement.textContent === newText;
+
+    const randomQuote = getDynamicMsg(messageArray);
+    message = randomQuote;
     
     // Check the current state of the button
-    if (buttonElement.style.backgroundColor === newColor) {
+    if (isButtonActive) {
         // Revert to original state (Clicking again shows the message)
-        const currentMessage = buttonElement.getAttribute('data-message');
-        message = `${currentMessage}`;
+
+        // buttonElement.setAttribute('data-message', randomQuote);
         
-        buttonElement.textContent = buttonElement.getAttribute('data-original-text') || "Find Power/Joy";
-        buttonElement.style.backgroundColor = originalColor;
+        buttonElement.textContent = buttonElement.getAttribute('data-original-text') || (messageArray === motivationalMsg ? "Find Power" : "Find Joy");
+        buttonElement.style.backgroundColor = originalColorValue;
 
     } else {
         // Change to new state (First click gets the message)
-        const randomQuote = getDynamicMsg(messageArray);
-        message = randomQuote;
+        // const randomQuote = getDynamicMsg(messageArray);
+        // message = randomQuote;
 
         // Store the quote on the button for later display/reset
-        buttonElement.setAttribute('data-message', randomQuote);
+        // buttonElement.setAttribute('data-message', randomQuote);
         buttonElement.setAttribute('data-original-text', buttonElement.textContent);
         
         buttonElement.textContent = newText;
-        buttonElement.style.backgroundColor = newColor;
+        buttonElement.style.backgroundColor = newColorValue;
     }
-    
+
+    buttonElement.setAttribute('data-message', randomQuote);
     showMessage(message);
 }
 
@@ -169,5 +181,4 @@ function createSplash(event) {
     setTimeout(() => {
         splash.remove();
     }, 1500); 
-
 }
